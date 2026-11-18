@@ -32,19 +32,15 @@ export default function Contribute() {
         <p className="lede">Sự hỗ trợ của bạn giúp trẻ em tại Gia Lai được kiểm tra thị lực và có kính phù hợp khi cần.</p>
         <div><Action href="#cach-dong-gop" variant="alt">Xem các cách đóng góp</Action></div>
       </header>
-      <section className="feature stack donation-qr" aria-labelledby="donation-qr-title">
-        <h2 id="donation-qr-title">Ủng hộ qua mã QR</h2>
-        <p>Quét bằng ứng dụng ngân hàng để chuyển khoản.</p>
-        <a className="donation-qr-image" href="/assets/donation-qr.png" target="_blank" rel="noreferrer" aria-label="Mở ảnh mã QR ủng hộ ở tab mới">
-          <Image
-            src="/assets/donation-qr.png"
-            alt="Mã QR chuyển khoản ủng hộ RE:VISION"
-            width={1587}
-            height={2245}
-            unoptimized
-          />
-        </a>
-      </section>
+      <a className="donation-qr-image" href="/assets/donation-qr.png" target="_blank" rel="noreferrer" aria-label="Mở ảnh mã QR ủng hộ ở tab mới">
+        <Image
+          src="/assets/donation-qr.png"
+          alt="Mã QR chuyển khoản ủng hộ RE:VISION"
+          width={1587}
+          height={2245}
+          unoptimized
+        />
+      </a>
     </div>
     <section id="cach-dong-gop" className="stack">
       <h2>Cách đóng góp</h2>
