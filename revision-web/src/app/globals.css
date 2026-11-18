@@ -26,7 +26,7 @@ button:disabled{cursor:wait;opacity:.65}
 :where(.stack){display:grid;gap:18px}
 .cluster{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
 .button{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:46px;padding:9px 16px;border:1px solid transparent;border-radius:12px;background:var(--primary);color:var(--white);font-weight:800;font-size:.9rem;transition:background .16s,transform .16s}
-.button:hover{background:var(--ink);transform:translateY(-1px)}
+.button:hover{background:var(--ink)}
 .button svg{width:18px;height:18px;flex:none}
 .button.alt{background:transparent;border-color:var(--line);color:var(--primary)}
 .button.alt:hover{background:var(--surface);border-color:var(--accent)}
@@ -102,4 +102,27 @@ td:nth-child(5),td:nth-child(6){min-width:180px;overflow-wrap:anywhere}
 .screen-banner{width:100%;height:auto;border-radius:var(--radius)}
 @media(max-width:760px){.hero,.split{grid-template-columns:1fr}.nav{display:none}.mobile-nav{display:block;position:relative}.mobile-nav summary{cursor:pointer;min-height:44px;display:flex;align-items:center;gap:7px;font-weight:800;color:var(--white)}.mobile-nav .menu{position:absolute;right:0;z-index:2;width:205px;background:var(--white);color:var(--ink);padding:10px;border:1px solid var(--line);border-radius:12px;box-shadow:0 8px 20px #0b607a22}.mobile-nav a{display:flex;min-height:44px;align-items:center;padding:7px 10px;border-radius:8px}.mobile-nav a:hover{background:var(--surface);color:var(--primary)}.stat{padding-inline:8px}.stats{padding:12px}.stat span{font-size:.76rem}}
 @media(max-width:480px){.wrap,.narrow{width:calc(100% - 32px)}.checklist{grid-template-columns:1fr}}
+@keyframes public-intro {
+  from { opacity: .68; transform: translateY(10px) }
+  to { opacity: 1; transform: translateY(0) }
+}
+
+@keyframes mobile-menu-in {
+  from { opacity: .65; transform: translateY(-4px) }
+  to { opacity: 1; transform: translateY(0) }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .motion-intro { animation: public-intro .42s cubic-bezier(.2,.75,.25,1) }
+  .hero-copy + .hero-copy { animation-delay: 45ms; animation-fill-mode: backwards }
+  .motion-media { animation-duration: .52s; animation-delay: 75ms; animation-fill-mode: backwards }
+  .mobile-nav[open] .menu { animation: mobile-menu-in .16s ease-out }
+  .button:not(:disabled):active { transform: translateY(1px) }
+}
+
+@media (prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine) {
+  .button:not(:disabled):hover { transform: translateY(-2px) }
+  .button:not(:disabled):active { transform: translateY(1px) }
+}
+
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}

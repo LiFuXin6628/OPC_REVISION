@@ -26,7 +26,7 @@ const waysToHelp = [
 export default function Contribute() {
   return <div className="wrap section stack gap-10">
     <div className="split contribute-intro">
-      <header className="stack">
+      <header className="stack motion-intro">
         <p className="eyebrow">Đóng góp và tài trợ</p>
         <h1 className="page-title">Đồng hành cùng RE:VISION</h1>
         <p className="lede">Sự hỗ trợ của bạn giúp trẻ em tại Gia Lai được kiểm tra thị lực và có kính phù hợp khi cần.</p>
@@ -42,7 +42,7 @@ export default function Contribute() {
         />
       </a>
     </div>
-    <section id="cach-dong-gop" className="stack">
+    <section id="cach-dong-gop" className="stack" data-motion-reveal>
       <h2>Cách đóng góp</h2>
       <div className="cards-grid">
         {waysToHelp.map(({ icon: Icon, title, description }) => <article className="card stack" key={title}>
@@ -52,7 +52,7 @@ export default function Contribute() {
         </article>)}
       </div>
     </section>
-    <section className="feature stack">
+    <section className="feature stack" data-motion-reveal>
       <h2>Trao đổi về tài trợ</h2>
       <p className="lede">Doanh nghiệp, tổ chức, cá nhân và đơn vị chuyên môn có thể liên hệ ban tổ chức để thống nhất hình thức đồng hành, hạng mục hỗ trợ và thông tin tiếp nhận.</p>
       <div><Action href={`mailto:${project.email}?subject=${encodeURIComponent("Đồng hành cùng RE:VISION")}`}>Liên hệ ban tổ chức</Action></div>
