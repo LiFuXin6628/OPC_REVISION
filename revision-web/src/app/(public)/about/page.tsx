@@ -28,7 +28,7 @@ export default function About() {
       <h2>Liên hệ ban tổ chức</h2>
       {project.organizers.map(person => <p key={person.name}>{person.role} · {person.name} · <a className="text-link" href={`tel:+84${person.phone.replaceAll(" ", "").slice(1)}`}>{person.phone}</a></p>)}
       <p>Các thành viên khác được nêu trong hồ sơ gồm Vũ Công Chính, Lê Phúc Tân và Lê Mai Ngọc Linh.</p>
-      <p>Fanpage <strong>Re:Vision Project</strong></p>
+      <p>Fanpage <a className="font-bold text-brand underline underline-offset-4" href={project.facebook}>RE:VISION Project</a></p>
       <div><Action href={`mailto:${project.email}`} variant="alt">Gửi email cho ban tổ chức</Action></div>
     </section>
   </div>;

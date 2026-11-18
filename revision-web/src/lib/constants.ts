@@ -16,6 +16,8 @@ export const genders = ["Nam", "Nữ", "Khác"] as const;
 export const project = {
   location: "Gia Lai",
   email: "revision.project.opc@gmail.com",
+  facebook: "https://www.facebook.com/profile.php?id=61596085415003",
+  address: "268 Lý Thường Kiệt, Diên Hồng, Ho Chi Minh City, Vietnam",
   organizers: [
     { name: "Trần Anh Khoa", role: "Nhóm trưởng", phone: "0935 902 520" },
     { name: "Trần Như Ý", role: "Nhóm phó", phone: "0364 049 422" },

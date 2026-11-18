@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Banknote, Glasses, HandHeart } from "lucide-react";
 import { Action } from "@/components/ui/action";
 import { project } from "@/lib/constants";
@@ -13,7 +14,7 @@ const waysToHelp = [
   {
     icon: Banknote,
     title: "Đóng góp kinh phí",
-    description: "Bạn có thể đóng góp một lần, theo đợt hoặc cho một hạng mục cụ thể. Liên hệ ban tổ chức để xác nhận cách tiếp nhận tiền mặt hoặc chuyển khoản.",
+    description: "Bạn có thể đóng góp một lần, theo đợt hoặc cho một hạng mục cụ thể. Quét mã QR để chuyển khoản hoặc liên hệ ban tổ chức để trao đổi về hình thức tiền mặt.",
   },
   {
     icon: HandHeart,
@@ -24,12 +25,28 @@ const waysToHelp = [
 
 export default function Contribute() {
   return <div className="wrap section stack gap-10">
-    <header className="stack">
-      <p className="eyebrow">Đóng góp và tài trợ</p>
-      <h1 className="page-title">Đồng hành cùng RE:VISION</h1>
-      <p className="lede">Sự hỗ trợ của bạn giúp trẻ em tại Gia Lai được kiểm tra thị lực và có kính phù hợp khi cần.</p>
-    </header>
-    <section className="stack">
+    <div className="split contribute-intro">
+      <header className="stack">
+        <p className="eyebrow">Đóng góp và tài trợ</p>
+        <h1 className="page-title">Đồng hành cùng RE:VISION</h1>
+        <p className="lede">Sự hỗ trợ của bạn giúp trẻ em tại Gia Lai được kiểm tra thị lực và có kính phù hợp khi cần.</p>
+        <div><Action href="#cach-dong-gop" variant="alt">Xem các cách đóng góp</Action></div>
+      </header>
+      <section className="feature stack donation-qr" aria-labelledby="donation-qr-title">
+        <h2 id="donation-qr-title">Ủng hộ qua mã QR</h2>
+        <p>Quét bằng ứng dụng ngân hàng để chuyển khoản.</p>
+        <a className="donation-qr-image" href="/assets/donation-qr.png" target="_blank" rel="noreferrer" aria-label="Mở ảnh mã QR ủng hộ ở tab mới">
+          <Image
+            src="/assets/donation-qr.png"
+            alt="Mã QR chuyển khoản ủng hộ RE:VISION"
+            width={1587}
+            height={2245}
+            unoptimized
+          />
+        </a>
+      </section>
+    </div>
+    <section id="cach-dong-gop" className="stack">
       <h2>Cách đóng góp</h2>
       <div className="cards-grid">
         {waysToHelp.map(({ icon: Icon, title, description }) => <article className="card stack" key={title}>
