@@ -1,6 +1,6 @@
 # RE:VISION
 
-- Thương hiệu dùng logo, banner và QR chính thức trong `public/assets`.
+- Thương hiệu dùng logo, banner và ảnh đội ngũ trong `public/assets`.
 - Màu chủ đạo #0b607a. Màu điểm nhấn #40b9cf, #dc4b6a và #f60060. Nền phụ #eef9fa.
 - Tiêu đề dùng Sora, nội dung dùng Plus Jakarta Sans, đều có bộ ký tự tiếng Việt.
 - Thang khoảng cách dựa trên 4 px. Thẻ bo 18–28 px, nút thường bo 12 px, độ nổi thấp.
