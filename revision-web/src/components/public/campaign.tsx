@@ -9,7 +9,7 @@ const activities = [
 
 export function Activities() {
   return <div className="cards-grid">
-    {activities.map(({ icon: Icon, title, text }) => <article key={title} className="card stack">
+    {activities.map(({ icon: Icon, title, text }, index) => <article key={title} className="card stack" data-motion-reveal="card" data-motion-order={index}>
       <span className="card-icon"><Icon aria-hidden="true" /></span>
       <h3>{title}</h3><p>{text}</p>
     </article>)}

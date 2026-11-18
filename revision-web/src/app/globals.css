@@ -103,8 +103,13 @@ td:nth-child(5),td:nth-child(6){min-width:180px;overflow-wrap:anywhere}
 @media(max-width:760px){.hero,.split{grid-template-columns:1fr}.nav{display:none}.mobile-nav{display:block;position:relative}.mobile-nav summary{cursor:pointer;min-height:44px;display:flex;align-items:center;gap:7px;font-weight:800;color:var(--white)}.mobile-nav .menu{position:absolute;right:0;z-index:2;width:205px;background:var(--white);color:var(--ink);padding:10px;border:1px solid var(--line);border-radius:12px;box-shadow:0 8px 20px #0b607a22}.mobile-nav a{display:flex;min-height:44px;align-items:center;padding:7px 10px;border-radius:8px}.mobile-nav a:hover{background:var(--surface);color:var(--primary)}.stat{padding-inline:8px}.stats{padding:12px}.stat span{font-size:.76rem}}
 @media(max-width:480px){.wrap,.narrow{width:calc(100% - 32px)}.checklist{grid-template-columns:1fr}}
 @keyframes public-intro {
-  from { opacity: .68; transform: translateY(10px) }
+  from { opacity: .38; transform: translateY(22px) }
   to { opacity: 1; transform: translateY(0) }
+}
+
+@keyframes public-media-in {
+  from { opacity: .32; transform: translateY(24px) scale(.964) }
+  to { opacity: 1; transform: translateY(0) scale(1) }
 }
 
 @keyframes mobile-menu-in {
@@ -113,9 +118,9 @@ td:nth-child(5),td:nth-child(6){min-width:180px;overflow-wrap:anywhere}
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .motion-intro { animation: public-intro .42s cubic-bezier(.2,.75,.25,1) }
-  .hero-copy + .hero-copy { animation-delay: 45ms; animation-fill-mode: backwards }
-  .motion-media { animation-duration: .52s; animation-delay: 75ms; animation-fill-mode: backwards }
+  .motion-intro { animation: public-intro .62s cubic-bezier(.2,.78,.23,1) }
+  .hero-copy + .hero-copy { animation-delay: 110ms; animation-fill-mode: backwards }
+  .motion-media { animation: public-media-in .78s cubic-bezier(.2,.78,.23,1) 170ms backwards }
   .mobile-nav[open] .menu { animation: mobile-menu-in .16s ease-out }
   .button:not(:disabled):active { transform: translateY(1px) }
 }

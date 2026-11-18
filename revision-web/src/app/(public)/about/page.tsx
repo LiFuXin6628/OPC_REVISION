@@ -23,8 +23,8 @@ export default function About() {
         className="h-auto w-full self-center rounded-[var(--radius)] motion-intro motion-media"
       />
     </section>
-    <section className="stack" data-motion-reveal><h2>Hoạt động tại điểm trường</h2><Activities /></section>
-    <section className="feature stack" data-motion-reveal>
+    <section className="stack"><h2 data-motion-reveal="heading">Hoạt động tại điểm trường</h2><Activities /></section>
+    <section className="feature stack" data-motion-reveal="panel">
       <h2>Liên hệ ban tổ chức</h2>
       {project.organizers.map(person => <p key={person.name}>{person.role} · {person.name} · <a className="text-link" href={`tel:+84${person.phone.replaceAll(" ", "").slice(1)}`}>{person.phone}</a></p>)}
       <p>Các thành viên khác: Vũ Công Chính, Lê Phúc Tân và Lê Mai Ngọc Linh.</p>

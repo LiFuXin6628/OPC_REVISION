@@ -23,11 +23,11 @@ export default function Home() {
         <figcaption><MapPin size={16} aria-hidden="true" /> {project.location} · Điểm trường sẽ được công bố khi xác nhận</figcaption>
       </figure>
     </section>
-    <section className="section wrap stack" data-motion-reveal>
-      <h2>Hoạt động tại điểm trường</h2>
+    <section className="section wrap stack">
+      <h2 data-motion-reveal="heading">Hoạt động tại điểm trường</h2>
       <Activities />
     </section>
-    <section className="wrap mb-12" data-motion-reveal><div className="feature stack">
+    <section className="wrap mb-12" data-motion-reveal="panel"><div className="feature stack">
       <h2>Cùng giúp các em có kính phù hợp</h2>
       <p className="lede">Bạn có thể tặng gọng kính còn tốt, đóng góp kinh phí, hỗ trợ vật tư hoặc đồng hành bằng chuyên môn.</p>
       <div><Action href="/contribute">Xem cách đóng góp <ArrowUpRight aria-hidden="true" /></Action></div>
