@@ -8,7 +8,7 @@ export const metadata = { title: "Về dự án" };
 export default function About() {
   return <div className="wrap section stack gap-10">
     <section className="split">
-      <div className="stack">
+      <div className="stack motion-intro">
         <p className="eyebrow">Về dự án</p>
         <h1 className="page-title">Kính cũ, Tầm nhìn mới</h1>
         <p className="lede">RE:VISION là dự án thiện nguyện của sáu sinh viên năm nhất Trường Đại học Bách khoa – ĐHQG TP.HCM. Dự án giúp trẻ em tại Gia Lai tiếp cận dịch vụ kiểm tra thị lực, đồng thời hỗ trợ kính cho các em có tật khúc xạ và hoàn cảnh khó khăn.</p>
@@ -20,11 +20,11 @@ export default function About() {
         width={2560}
         height={1920}
         sizes="(max-width: 480px) calc(100vw - 32px), (max-width: 760px) calc(100vw - 48px), (max-width: 1248px) 37vw, 445px"
-        className="h-auto w-full self-center rounded-[var(--radius)]"
+        className="h-auto w-full self-center rounded-[var(--radius)] motion-intro motion-media"
       />
     </section>
-    <section className="stack"><h2>Hoạt động tại điểm trường</h2><Activities /></section>
-    <section className="feature stack">
+    <section className="stack"><h2 data-motion-reveal="heading">Hoạt động tại điểm trường</h2><Activities /></section>
+    <section className="feature stack" data-motion-reveal="panel">
       <h2>Liên hệ ban tổ chức</h2>
       {project.organizers.map(person => <p key={person.name}>{person.role} · {person.name} · <a className="text-link" href={`tel:+84${person.phone.replaceAll(" ", "").slice(1)}`}>{person.phone}</a></p>)}
       <p>Các thành viên khác: Vũ Công Chính, Lê Phúc Tân và Lê Mai Ngọc Linh.</p>
