@@ -23,7 +23,7 @@ Mở [localhost:3000](http://localhost:3000). Khởi động lại máy chủ sa
 
 Đặt `SUBMISSION_STORAGE=sqlite` trong `.env.local` để dùng cơ sở dữ liệu SQLite trên máy chạy website. Ứng dụng tạo `.data/revision.sqlite` khi đọc hoặc lưu phiếu lần đầu. Tắt và mở lại website vẫn giữ nguyên các phiếu đã lưu. Để sao lưu, dừng máy chủ rồi sao chép tệp SQLite đến nơi dành riêng cho ban tổ chức.
 
-Mở [trang quản trị](http://localhost:3000/login), đăng nhập rồi bấm **Tải Excel** hoặc **Tải CSV**. Cả hai nút xuất toàn bộ phiếu, kể cả khi bảng đang lọc. Giữ các tệp xuất ở nơi riêng tư vì chúng chứa hồ sơ học sinh.
+Mở [trang quản trị](http://localhost:3000/login), đăng nhập rồi bấm **Tải Excel** hoặc **Tải CSV**. Cả hai nút xuất toàn bộ phiếu, kể cả khi bảng đang lọc. Excel chia thành các tab YYYY-MM-DD theo ngày điền phiếu. CSV có một bảng, gồm cột ngày điền phiếu để lọc. Để xem đủ các tab trên Google Sheets khi dùng SQLite, tải Excel và mở tệp bằng Google Sheets trên Google Drive. Giữ các tệp xuất ở nơi riêng tư vì chúng chứa hồ sơ học sinh.
 
 Khi chuyển sang `SUBMISSION_STORAGE=google-sheets`, ứng dụng đọc và ghi trực tiếp vào bảng tính đã cấu hình. Muốn chuyển các phiếu local, tải CSV trước khi đổi chế độ và nhập vào tab `Submissions` của bảng tính mới còn trống. Giữ ngày khám ở dạng văn bản ISO `YYYY-MM-DD`. Dữ liệu giữa hai nguồn được chuyển thủ công.
 
@@ -33,9 +33,9 @@ Chọn `SUBMISSION_STORAGE=google-sheets` để dùng nguồn này. Máy chủ c
 
 1. Trong [Google Cloud Console](https://console.cloud.google.com/), tạo hoặc chọn dự án, rồi bật **Google Sheets API**.
 2. Vào **IAM & Admin → Service Accounts**, tạo tài khoản dịch vụ. Trong **Keys**, tạo khóa JSON. Giữ file này ở nơi riêng tư.
-3. Tạo một bảng tính riêng, đổi tên tab thành **Submissions**, rồi chia sẻ bảng tính với email tài khoản dịch vụ ở quyền **Editor**. Chỉ gửi quyền xem hoặc sửa cho các tài khoản ban tổ chức cần quyền truy cập.
+3. Tạo một bảng tính riêng, rồi chia sẻ bảng tính với email tài khoản dịch vụ ở quyền **Editor**. Chỉ gửi quyền xem hoặc sửa cho các tài khoản ban tổ chức cần quyền truy cập.
 4. Điền biến môi trường theo bảng dưới. Với private key, có thể giữ ký tự xuống dòng của PEM trong giá trị nhiều dòng hoặc dùng chuỗi `\n` trong giá trị.
-5. Gửi một phiếu thử. Ứng dụng tự tạo hàng tiêu đề A1:R1 nếu còn trống. Giữ tên tab và cấu trúc cột, mỗi hàng từ hàng 2 là một phiếu.
+5. Gửi một phiếu thử. Ứng dụng tự tạo tab theo ngày điền phiếu (YYYY-MM-DD), kèm 32 tiêu đề cột A:AF. Mỗi hàng từ hàng 2 là một phiếu. Các tab Submissions định dạng cũ tiếp tục được đọc và dữ liệu cũ sẽ được phân ngày theo thời gian nộp ở múi giờ Việt Nam.
 
 | Biến môi trường | Giá trị |
 | --- | --- |
@@ -53,9 +53,15 @@ Tạo bí mật ngẫu nhiên bằng `node -e "console.log(require('node:crypto'
 1. Import repo vào Vercel, chọn preset **Next.js** và đặt **Root Directory** thành `revision-web`.
 2. Chọn phiên bản Node.js 22 hoặc mới hơn. Đặt `SUBMISSION_STORAGE=google-sheets` và thêm sáu biến kết nối và đăng nhập trong **Settings → Environment Variables** cho môi trường cần dùng. Dùng bảng tính riêng cho các lần thử nếu cấu hình Preview.
 3. Deploy. Các API dùng Node.js Functions. Edge Middleware kiểm tra phiên trên `/dashboard`. Trang và API quản trị cũng kiểm tra phiên trước khi truy xuất dữ liệu.
-4. Trên tên miền HTTPS, kiểm tra một phiếu thử từ lúc điền đến lúc thấy đủ 18 cột trong Google Sheets. Đăng nhập, lọc phiếu và tải cả Excel lẫn CSV. Xóa bản ghi thử trước khi mở đợt sàng lọc.
+4. Trên tên miền HTTPS, kiểm tra một phiếu thử từ lúc điền đến lúc thấy đủ 32 cột trong Google Sheets. Đăng nhập, lọc phiếu và tải cả Excel lẫn CSV. Xóa bản ghi thử trước khi mở đợt sàng lọc.
 5. Nếu cấu hình Vercel Firewall, đặt giới hạn yêu cầu phù hợp cho `POST /api/auth` và `POST /api/screening`.
 
-`npm.cmd run typecheck` kiểm tra TypeScript. `npm.cmd run build` tạo bản production và `npm.cmd start` chạy bản build. Trong bảng điều khiển, KPI “Có dấu hiệu cần kiểm tra” đếm phiếu có ít nhất một dấu hiệu được chọn. Ngày khám mặc định và KPI hôm nay dùng múi giờ Việt Nam. Excel và CSV xuất toàn bộ phiếu.
+`npm.cmd run typecheck` kiểm tra TypeScript. `npm.cmd run build` tạo bản production và `npm.cmd start` chạy bản build. Trong bảng điều khiển, KPI “Có dấu hiệu cần kiểm tra” đếm phiếu có ít nhất một dấu hiệu được chọn. Mỗi lần khám là một phiếu. Các lần khám lại được giữ trong lịch sử và phân theo ngày điền phiếu. Phiếu cùng ngày nằm chung một tab. Ứng dụng giữ các phiếu có cùng tên vì học sinh có thể trùng tên. Ngày khám mặc định và KPI hôm nay dùng múi giờ Việt Nam. Excel và CSV xuất toàn bộ phiếu.
 
 Tài liệu tham khảo: [Google Sheets API](https://developers.google.com/workspace/sheets/api/quickstart), [Next.js Middleware](https://nextjs.org/docs/15/app/api-reference/file-conventions/middleware), [Biến môi trường Vercel](https://vercel.com/docs/environment-variables).
+
+## Các trường mới trong phiếu
+
+Phiếu gồm trường học và ngày điền phiếu, cùng sáu thông số riêng cho mắt trái và mắt phải gồm thị lực không kính (/10), SPH (D), CYL (D), AXIS (độ), thị lực có kính (/10) và loại kính. Để trống thông số chưa đo. Thị lực nhập phần tử số từ 0 đến 10, AXIS nhập số nguyên từ 0 đến 180. SPH và CYL có thể là số âm hoặc dương. Các giá trị bằng 0 được lưu và xuất nguyên vẹn.
+
+Ngày điền phiếu quyết định tab xuất, còn ngày khám ghi nhận ngày thực hiện khám. Với dữ liệu cũ thiếu trường mới, phần thông số để trống và ngày điền phiếu được lấy từ thời gian nộp.

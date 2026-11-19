@@ -89,6 +89,9 @@ button:disabled{cursor:wait;opacity:.65}
 .field textarea{resize:vertical}
 fieldset{margin:0;padding:0;border:0;min-width:0}
 legend{margin-bottom:12px;font-weight:800;color:var(--primary)}
+.eye-panel{background:var(--surface);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.eye-panel-title{padding:14px 20px;text-align:center;background:var(--primary);color:var(--white);font-family:"Sora Variable",sans-serif;font-size:1.05rem;font-weight:700;line-height:1.4}
+.eye-panel-fields{padding:clamp(16px,3vw,24px);gap:16px}
 .checklist{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
 .check{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:11px;min-height:46px;display:flex;gap:10px;align-items:flex-start;cursor:pointer}
 .check:has(:checked){border-color:var(--primary);box-shadow:inset 0 0 0 1px var(--primary)}

@@ -27,6 +27,11 @@ export const assets = { logo: "/assets/Logo.png", banner: "/assets/banner.png" }
 export const sheetHeaders = [
   "STT", "Họ và tên học sinh", "Lớp", "Giới tính", "Ngày khám",
   ...symptoms, "Tổng số dấu hiệu phát hiện", "Ghi chú", "Thời gian nộp",
+  "Trường học", "Ngày điền phiếu",
+  ...["Mắt trái", "Mắt phải"].flatMap(eye => [
+    `${eye} - Thị lực không kính (/10)`, `${eye} - SPH (D)`, `${eye} - CYL (D)`,
+    `${eye} - AXIS (độ)`, `${eye} - Thị lực có kính (/10)`, `${eye} - Loại kính`,
+  ]),
 ];
 
 export function schoolDate(date = new Date()) {

@@ -3,6 +3,7 @@ import { mkdirSync } from "node:fs";
 import { join } from "node:path";
 import { DatabaseSync } from "node:sqlite";
 import type { Student, Submission } from "@/types";
+import { normalizeStoredStudent } from "./submission-data";
 
 function withDatabase<T>(operation: (db: DatabaseSync) => T): T {
   const directory = join(process.cwd(), ".data");
@@ -35,7 +36,7 @@ export function readLocalSubmissions(): Submission[] {
   return withDatabase(db => db.prepare("SELECT id, student_json, submitted_at FROM submissions ORDER BY id")
     .all()
     .map(row => ({
-      ...(JSON.parse(row.student_json as string) as Student),
+      ...normalizeStoredStudent(JSON.parse(row.student_json as string), String(row.submitted_at)),
       id: Number(row.id),
       submittedAt: String(row.submitted_at),
     })));

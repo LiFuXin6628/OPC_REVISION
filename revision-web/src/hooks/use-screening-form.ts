@@ -16,12 +16,26 @@ export function useScreeningForm() {
     setError("");
 
     const fields = new FormData(event.currentTarget);
+    function eyeValues(side: string) {
+      const measurement = (key: string) => {
+        const value = String(fields.get(`${side}.${key}`) ?? "").trim();
+        return value === "" ? null : Number(value);
+      };
+      return {
+        uncorrectedVision: measurement("uncorrectedVision"),
+        sph: measurement("sph"), cyl: measurement("cyl"), axis: measurement("axis"),
+        correctedVision: measurement("correctedVision"),
+        lensType: String(fields.get(`${side}.lensType`) ?? ""),
+      };
+    }
     const result = screeningSchema.safeParse({
       name: fields.get("name"), grade: fields.get("grade"), gender: fields.get("gender"),
+      school: fields.get("school"), surveyDate: fields.get("surveyDate"),
+      leftEye: eyeValues("leftEye"), rightEye: eyeValues("rightEye"),
       date: fields.get("date"), symptoms: fields.getAll("symptoms").map(Number), notes: fields.get("notes"),
     });
     if (!result.success) {
-      setError("Vui lòng kiểm tra họ tên, lớp, ngày khám và ghi chú.");
+      setError("Vui lòng kiểm tra thông tin học sinh, ngày điền phiếu và các thông số mắt.");
       return;
     }
 

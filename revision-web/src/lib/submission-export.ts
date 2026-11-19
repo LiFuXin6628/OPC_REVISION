@@ -1,14 +1,10 @@
 import "server-only";
 import { Workbook } from "exceljs";
-import { sheetHeaders, symptoms } from "./constants";
+import { sheetHeaders, submissionRow, groupSubmissionsByDate } from "./submission-data";
 import type { Submission } from "@/types";
 
 function rows(submissions: Submission[]) {
-  return [sheetHeaders, ...submissions.map(student => [
-    student.id, student.name, student.grade, student.gender, student.date,
-    ...symptoms.map((_, i) => student.symptoms.includes(i) ? "CÓ" : "KHÔNG"),
-    student.symptoms.length, student.notes, student.submittedAt,
-  ])];
+  return [sheetHeaders, ...submissions.map(submissionRow)];
 }
 
 export function exportCsv(submissions: Submission[]) {
@@ -21,11 +17,17 @@ export function exportCsv(submissions: Submission[]) {
 
 export async function exportExcel(submissions: Submission[]) {
   const workbook = new Workbook();
-  const sheet = workbook.addWorksheet("Submissions", { views: [{ state: "frozen", ySplit: 1 }] });
-  sheet.addRows(rows(submissions));
-  sheet.getRow(1).font = { bold: true };
-  sheet.autoFilter = "A1:R1";
-  sheet.columns.forEach((column, index) => { column.width = index === 0 ? 7 : 26; });
+  const groups = groupSubmissionsByDate(submissions);
+  if (!groups.length) groups.push(["Chua co du lieu", []]);
+  for (const [date, students] of groups) {
+    const sheet = workbook.addWorksheet(date, { views: [{ state: "frozen", ySplit: 1 }] });
+    sheet.addRows(rows(students));
+    sheet.getRow(1).font = { bold: true };
+    sheet.getRow(1).alignment = { wrapText: true, vertical: "middle" };
+    sheet.getRow(1).height = 48;
+    sheet.autoFilter = { from: { row: 1, column: 1 }, to: { row: 1, column: sheetHeaders.length } };
+    sheet.columns.forEach((column, index) => { column.width = index === 0 ? 7 : 26; });
+  }
   const buffer = await workbook.xlsx.writeBuffer();
   return new Uint8Array(buffer);
 }
