@@ -3,6 +3,7 @@
 import { Send } from "lucide-react";
 import { genders, grades, symptoms } from "@/lib/constants";
 import { useScreeningForm } from "@/hooks/use-screening-form";
+import { EyeFields } from "./eye-fields";
 
 export function ScreeningForm({ date }: { date: string }) {
   const { submit, submitting, error } = useScreeningForm();
@@ -12,6 +13,9 @@ export function ScreeningForm({ date }: { date: string }) {
       <legend>Thông tin học sinh</legend>
       <label className="field">Họ và tên học sinh (bắt buộc)
         <input name="name" required maxLength={120} autoComplete="off" />
+      </label>
+      <label className="field">Trường học (bắt buộc)
+        <input name="school" required maxLength={200} autoComplete="off" />
       </label>
       <div className="grid gap-3 sm:grid-cols-2">
         <label className="field">Lớp (bắt buộc)
@@ -30,6 +34,18 @@ export function ScreeningForm({ date }: { date: string }) {
       <label className="field">Ngày khám
         <input type="date" name="date" required defaultValue={date} />
       </label>
+      <label className="field">Ngày điền phiếu (bắt buộc)
+        <input type="date" name="surveyDate" required defaultValue={date} />
+      </label>
+    </fieldset>
+
+    <fieldset disabled={submitting} className="stack">
+      <legend>Kết quả kiểm tra mắt</legend>
+      <p className="text-sm">Nhập phần tử số của thị lực /10, ví dụ nhập 8 cho 8/10. Để trống thông số chưa đo.</p>
+      <div className="grid gap-4 sm:grid-cols-2">
+        <EyeFields side="leftEye" label="Mắt trái" />
+        <EyeFields side="rightEye" label="Mắt phải" />
+      </div>
     </fieldset>
 
     <fieldset disabled={submitting}>
