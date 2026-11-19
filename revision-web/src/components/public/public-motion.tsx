@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useRef, type ReactNode } from "react";
 
@@ -62,5 +62,5 @@ export function PublicMotion({ children }: { children: ReactNode }) {
     };
   }, []);
 
-  return <div ref={root}>{children}</div>;
+  return <div ref={root} className="public-pages">{children}</div>;
 }

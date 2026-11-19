@@ -1,3 +1,4 @@
+﻿import { Slogan } from "@/components/public/slogan";
 import Image from "next/image";
 import { ArrowDownRight, ArrowUpRight, HeartHandshake, MapPin } from "lucide-react";
 import { Action } from "@/components/ui/action";
@@ -9,7 +10,7 @@ export default function Home() {
     <section className="section wrap hero">
       <div className="hero-copy motion-intro">
         <p className="eyebrow"><HeartHandshake aria-hidden="true" /> Dự án thiện nguyện của sinh viên Bách khoa</p>
-        <h1><span>Kính cũ,</span><span>Tầm nhìn mới</span></h1>
+        <Slogan />
       </div>
       <div className="hero-copy motion-intro">
         <p className="lede">RE:VISION giúp trẻ em tại Gia Lai được kiểm tra thị lực, biết cách chăm sóc mắt và có kính phù hợp khi cần.</p>

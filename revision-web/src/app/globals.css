@@ -1,10 +1,10 @@
-@import "@fontsource-variable/sora";
+﻿@import "@fontsource-variable/sora";
 @import "@fontsource-variable/plus-jakarta-sans";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root{--primary:#0b607a;--accent:#40b9cf;--rose:#dc4b6a;--surface:#eef9fa;--vivid:#f60060;--paper:#fcfbf7;--ink:#15383e;--muted:#4e676b;--line:#d8e6e6;--action:#a92e4c;--white:#fff;--radius:22px}
+:root{--primary:#0b607a;--accent:#40b9cf;--rose:#dc4b6a;--surface:#eef9fa;--vivid:#f60060;--paper:#fcfbf7;--ink:#15383e;--muted:#4e676b;--line:#d8e6e6;--action:#a92e4c;--white:#fff;--blush:#fff0f3;--pink-line:#f1c8d2;--aqua:#d8f1f4;--radius:22px}
 *{box-sizing:border-box}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:"Plus Jakarta Sans Variable",sans-serif;font-size:16px;line-height:1.65}
 a{color:inherit;text-decoration:none}
@@ -49,8 +49,14 @@ button:disabled{cursor:wait;opacity:.65}
 .mobile-nav{display:none}
 .hero{display:grid;grid-template-columns:1.4fr 1fr;align-items:end;gap:clamp(18px,3.4vw,44px);padding-block:clamp(32px,5vw,66px) 24px}
 .hero-copy{display:grid;gap:24px}
-.hero h1 span{display:block}
-.hero h1 span:last-child{color:var(--action)}
+.slogan{font-size:clamp(1.85rem,4.25vw,3.7rem);line-height:1.16;letter-spacing:-.055em;font-weight:750;text-wrap:initial}.slogan > span{display:block;white-space:nowrap}.slogan > span:last-child{color:var(--action)}.slogan .slogan-dash{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+.public-pages .cards-grid > .card{background:var(--surface);border-color:var(--line)}
+.public-pages .cards-grid > .card h3{color:var(--primary)}
+.public-pages .cards-grid > .card .card-icon{background:var(--white);color:var(--primary)}
+.public-pages .feature{background:var(--blush);border-color:var(--pink-line)}
+.public-pages .feature h2{color:var(--action)}
+.public-pages .hero{position:relative;isolation:isolate}
+.public-pages .hero::before{content:"";position:absolute;z-index:-1;inset:0 calc((min(1200px,100vw - 48px) - 100vw)/2) 28%;background:var(--surface);pointer-events:none}
 .hero-image{grid-column:1/-1;margin:0;min-width:0}
 .hero-image img{display:block;width:100%;height:auto;border-radius:var(--radius);border:1px solid var(--line);box-shadow:0 12px 24px #0b607a14}
 .hero-image figcaption{display:flex;align-items:center;gap:7px;margin-top:10px;font-size:.82rem;color:var(--muted)}

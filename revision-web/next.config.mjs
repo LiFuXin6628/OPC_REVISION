@@ -1,3 +1,5 @@
+import { PHASE_DEVELOPMENT_SERVER } from 'next/constants.js';
+
 /** @type {import('next').NextConfig} */
 const config = {
   poweredByHeader: false,
@@ -13,5 +15,8 @@ const config = {
     }];
   },
 };
-export default config;
+export default (phase) => ({
+  ...config,
+  distDir: phase === PHASE_DEVELOPMENT_SERVER ? '.next-dev' : '.next',
+});
 

@@ -1,4 +1,4 @@
-# RE:VISION – Kính cũ, Tầm nhìn mới
+﻿# RE:VISION – SEE CLEARER - DREAM BIGGER
 
 Website Next.js App Router cho dự án hỗ trợ kiểm tra thị lực và trao kính cho trẻ em tại Gia Lai.
 

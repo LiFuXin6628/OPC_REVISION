@@ -1,3 +1,4 @@
+﻿import { Slogan } from "@/components/public/slogan";
 import Image from "next/image";
 import { Activities } from "@/components/public/campaign";
 import { Action } from "@/components/ui/action";
@@ -10,7 +11,7 @@ export default function About() {
     <section className="split">
       <div className="stack motion-intro">
         <p className="eyebrow">Về dự án</p>
-        <h1 className="page-title">Kính cũ, Tầm nhìn mới</h1>
+        <Slogan />
         <p className="lede">RE:VISION là dự án thiện nguyện của sáu sinh viên năm nhất Trường Đại học Bách khoa – ĐHQG TP.HCM. Dự án giúp trẻ em tại Gia Lai tiếp cận dịch vụ kiểm tra thị lực, đồng thời hỗ trợ kính cho các em có tật khúc xạ và hoàn cảnh khó khăn.</p>
         <p>Nhóm phối hợp với đơn vị chuyên môn để kiểm tra tình trạng và độ phù hợp của gọng đã qua sử dụng. Tái sử dụng gọng còn tốt giúp giảm chi phí, còn tròng kính được làm mới theo kết quả kiểm tra thị lực và nhu cầu của từng em.</p>
       </div>

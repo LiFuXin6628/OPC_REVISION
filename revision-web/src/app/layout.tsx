@@ -1,9 +1,9 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { Footer, Header } from "@/components/layout/site-chrome";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: { default: "RE:VISION – Kính cũ, Tầm nhìn mới", template: "%s | RE:VISION" },
+  title: { default: "RE:VISION – SEE CLEARER - DREAM BIGGER", template: "%s | RE:VISION" },
   description: "Dự án thiện nguyện hỗ trợ kiểm tra thị lực, chăm sóc mắt và trao kính phù hợp cho trẻ em tại Gia Lai.",
   icons: { icon: "/assets/Logo.png" },
 };
