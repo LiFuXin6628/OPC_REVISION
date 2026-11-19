@@ -1,4 +1,4 @@
-# RE:VISION – Kính cũ, Tầm nhìn mới
+# RE:VISION – SEE CLEARER, DREAM BIGGER
 
 RE:VISION là dự án thiện nguyện của nhóm sáu sinh viên năm nhất Trường Đại học Bách khoa - ĐHQG TP.HCM. Dự án giúp trẻ em làng "A" (lưu ý A là do chưa nắm rõ tên của làng nên khi biết sẽ sửa lại sau) tại tỉnh Gia Lai tiếp cận dịch vụ kiểm tra thị lực, biết cách chăm sóc mắt và có kính phù hợp khi cần. Việc tái sử dụng gọng kính còn tốt giúp giảm chi phí, lan tỏa tinh thần sẻ chia và tương thân tương ái.
 
