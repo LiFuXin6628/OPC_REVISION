@@ -11,7 +11,11 @@ export const symptoms = [
   "Không đọc được chữ nhỏ trên bảng từ cự ly bình thường",
 ] as const;
 
-export const grades = ["Lớp 1", "Lớp 2", "Lớp 3", "Lớp 4", "Lớp 5"] as const;
+export const grades = [
+  "1A", "1B", "1C", "2A", "2B", "2C", "3A", "3B", "3C",
+  "4A", "4B", "4C", "5A", "5B", "5C",
+] as const;
+export const defaultSchool = "Trường TH&THCS Chư Đang Ya";
 export const genders = ["Nam", "Nữ", "Khác"] as const;
 export const project = {
   location: "Gia Lai",

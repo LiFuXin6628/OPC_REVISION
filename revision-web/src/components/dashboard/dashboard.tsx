@@ -2,6 +2,7 @@
 
 import { Download, ExternalLink, LogOut } from "lucide-react";
 import { useState } from "react";
+import Link from "next/link";
 import { grades, symptoms } from "@/lib/constants";
 import type { Submission } from "@/types";
 
@@ -18,6 +19,7 @@ export function Dashboard({ submissions, sheetUrl, today, loadFailed }: {
   const [surveyDate, setSurveyDate] = useState("");
   const [pending, setPending] = useState(false);
   const [message, setMessage] = useState("");
+  const filterGrades = [...new Set([...grades, ...submissions.map(student => student.grade)])];
   const visible = submissions.filter(student => normalize(student.name).includes(normalize(query.trim()))
     && (!grade || student.grade === grade)
     && (!surveyDate || student.surveyDate === surveyDate)
@@ -44,6 +46,7 @@ export function Dashboard({ submissions, sheetUrl, today, loadFailed }: {
   return <div className="stack gap-6">
     <div className="cluster justify-between">
       <div className="cluster">
+        <Link className="button" href="/screening">Nhập phiếu sàng lọc</Link>
         {!loadFailed && <>
         <a className="button" href="/api/submissions?format=xlsx"><Download aria-hidden="true" /> Tải Excel</a>
         <a className="button alt" href="/api/submissions?format=csv"><Download aria-hidden="true" /> Tải CSV</a>
@@ -72,7 +75,7 @@ export function Dashboard({ submissions, sheetUrl, today, loadFailed }: {
         <label className="field">Lọc theo lớp
           <select value={grade} onChange={e => setGrade(e.target.value)}>
             <option value="">Tất cả các lớp</option>
-            {grades.map(label => <option key={label}>{label}</option>)}
+            {filterGrades.map(label => <option key={label}>{label}</option>)}
           </select>
         </label>
         <label className="field">Lọc theo dấu hiệu

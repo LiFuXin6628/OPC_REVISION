@@ -1,7 +1,7 @@
 "use client";
 
 import { Send } from "lucide-react";
-import { genders, grades, symptoms } from "@/lib/constants";
+import { defaultSchool, genders, grades, symptoms } from "@/lib/constants";
 import { useScreeningForm } from "@/hooks/use-screening-form";
 import { EyeFields } from "./eye-fields";
 
@@ -15,7 +15,7 @@ export function ScreeningForm({ date }: { date: string }) {
         <input name="name" required maxLength={120} autoComplete="off" />
       </label>
       <label className="field">Trường học (bắt buộc)
-        <input name="school" required maxLength={200} autoComplete="off" />
+        <input name="school" required defaultValue={defaultSchool} maxLength={200} autoComplete="off" />
       </label>
       <div className="grid gap-3 sm:grid-cols-2">
         <label className="field">Lớp (bắt buộc)

@@ -17,6 +17,18 @@ Trên PowerShell, gọi `npm.cmd` để chạy npm khi chính sách thực thi c
 
 Mở [localhost:3000](http://localhost:3000). Khởi động lại máy chủ sau khi sửa `.env.local`.
 
+## Phân biệt các tệp môi trường
+
+`.env.example` là mẫu liệt kê các tên biến và hướng dẫn điền. Next.js đọc các giá trị thật từ `.env.local` khi chạy trên máy. `.env.local` được Git bỏ qua để giữ riêng mật khẩu và khóa. Các giá trị trên máy cần được khai báo riêng trong dự án Vercel.
+
+Đăng nhập cần đủ `ADMIN_USERNAME`, `ADMIN_PASSWORD` và `JWT_SECRET` có ít nhất 32 byte. Thông báo “Quản trị viên chưa được cấu hình” xuất hiện khi thiếu một trong ba giá trị này hoặc khóa ký quá ngắn. Nhật ký máy chủ cho biết tên biến chưa hợp lệ và giữ riêng giá trị của chúng.
+
+Để sửa trên Vercel, mở đúng project → **Settings → Environment Variables**, thêm ba giá trị tương ứng trong `.env.local`, chọn môi trường **Production** cho tên miền chính và **Preview** nếu cần thử nhánh. Sau khi lưu, vào **Deployments → Redeploy** để tạo deployment mới. Giữ tên biến đúng như mẫu và giữ các giá trị ở phía máy chủ. Cấu hình **Root Directory** thành `revision-web`.
+
+## Quyền truy cập phiếu sàng lọc
+
+Quản trị viên đăng nhập qua `/login` để nhìn thấy mục **Sàng lọc** và **Quản lý** trên cả thanh điều hướng máy tính và menu điện thoại. Trang `/screening`, màn hình xác nhận và API gửi phiếu đều kiểm tra phiên quản trị. Khi phiên hết hạn, cần đăng nhập lại trước khi tiếp tục.
+
 Để thiết bị khác tại trường mở website, chạy `npm.cmd run dev -- --hostname 0.0.0.0` và mở `http://<IP-máy-chủ>:3000` trong cùng mạng. Chỉ dùng chế độ phát triển trên mạng tin cậy. Khi vận hành với hồ sơ học sinh, dùng HTTPS. Chế độ SQLite lưu và đọc phiếu qua mạng nội bộ ngay cả khi máy chủ mất Internet.
 
 ## Lưu và xuất dữ liệu trên máy tính
@@ -52,7 +64,7 @@ Tạo bí mật ngẫu nhiên bằng `node -e "console.log(require('node:crypto'
 
 1. Import repo vào Vercel, chọn preset **Next.js** và đặt **Root Directory** thành `revision-web`.
 2. Chọn phiên bản Node.js 22 hoặc mới hơn. Đặt `SUBMISSION_STORAGE=google-sheets` và thêm sáu biến kết nối và đăng nhập trong **Settings → Environment Variables** cho môi trường cần dùng. Dùng bảng tính riêng cho các lần thử nếu cấu hình Preview.
-3. Deploy. Các API dùng Node.js Functions. Edge Middleware kiểm tra phiên trên `/dashboard`. Trang và API quản trị cũng kiểm tra phiên trước khi truy xuất dữ liệu.
+3. Deploy. Các API dùng Node.js Functions. Edge Middleware kiểm tra phiên trên `/dashboard` và `/screening`. Trang và API quản trị cũng kiểm tra phiên trước khi truy xuất hoặc ghi dữ liệu. Cấu hình biến mới cần được áp dụng bằng một deployment mới.
 4. Trên tên miền HTTPS, kiểm tra một phiếu thử từ lúc điền đến lúc thấy đủ 32 cột trong Google Sheets. Đăng nhập, lọc phiếu và tải cả Excel lẫn CSV. Xóa bản ghi thử trước khi mở đợt sàng lọc.
 5. Nếu cấu hình Vercel Firewall, đặt giới hạn yêu cầu phù hợp cho `POST /api/auth` và `POST /api/screening`.
 
@@ -63,5 +75,7 @@ Tài liệu tham khảo: [Google Sheets API](https://developers.google.com/works
 ## Các trường mới trong phiếu
 
 Phiếu gồm trường học và ngày điền phiếu, cùng sáu thông số riêng cho mắt trái và mắt phải gồm thị lực không kính (/10), SPH (D), CYL (D), AXIS (độ), thị lực có kính (/10) và loại kính. Để trống thông số chưa đo. Thị lực nhập phần tử số từ 0 đến 10, AXIS nhập số nguyên từ 0 đến 180. SPH và CYL có thể là số âm hoặc dương. Các giá trị bằng 0 được lưu và xuất nguyên vẹn.
+
+Trường học mặc định là **Trường TH&THCS Chư Đang Ya** và có thể chỉnh trong phiếu. Lớp gồm 1A, 1B, 1C đến 5A, 5B, 5C. Dữ liệu đã lưu với tên lớp cũ được giữ nguyên và vẫn có thể lọc, xem hoặc xuất.
 
 Ngày điền phiếu quyết định tab xuất, còn ngày khám ghi nhận ngày thực hiện khám. Với dữ liệu cũ thiếu trường mới, phần thông số để trống và ngày điền phiếu được lấy từ thời gian nộp.
