@@ -49,6 +49,10 @@ export function useScreeningForm() {
         router.replace("/screening/success");
         return;
       }
+      if (response.status === 401) {
+        router.replace("/login");
+        return;
+      }
       const data = await response.json();
       setError(data.message ?? "Gửi phiếu chưa thành công.");
     } catch {

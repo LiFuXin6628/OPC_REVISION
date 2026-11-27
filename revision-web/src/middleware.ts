@@ -17,6 +17,6 @@ export async function middleware(request: NextRequest) {
 }
 
 // Next.js 15 middleware defaults to the Edge runtime.
-export const config = { matcher: ["/dashboard/:path*"] };
+export const config = { matcher: ["/dashboard/:path*", "/screening/:path*"] };
 
 

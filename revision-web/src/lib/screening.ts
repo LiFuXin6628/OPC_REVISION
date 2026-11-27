@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { genders, grades, symptoms } from "./constants";
+import { defaultSchool, genders, grades, symptoms } from "./constants";
 
 const optionalMeasurement = (min: number, max: number) => z.number().finite().min(min).max(max).nullable().default(null);
 
@@ -16,7 +16,7 @@ export const emptyEye = () => eyeSchema.parse({});
 
 export const screeningSchema = z.strictObject({
   name: z.string().trim().min(1, "Vui lòng nhập họ và tên học sinh.").max(120),
-  school: z.string().trim().max(200).default(""),
+  school: z.string().trim().min(1, "Vui lòng nhập tên trường.").max(200).default(defaultSchool),
   grade: z.enum(grades, { error: "Vui lòng chọn lớp." }),
   gender: z.enum(genders).or(z.literal("")).default(""),
   date: z.iso.date({ error: "Ngày khám không hợp lệ." }),

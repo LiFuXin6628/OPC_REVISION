@@ -3,11 +3,12 @@ import Image from "next/image";
 import { Mail, MapPin, ShieldCheck } from "lucide-react";
 import { assets, project } from "@/lib/constants";
 import { MobileNav } from "./mobile-nav";
+import { cookies } from "next/headers";
+import { isAdmin, sessionCookie } from "@/lib/auth";
 
-const links = [
+const publicLinks = [
   { href: "/", label: "Trang chủ" },
   { href: "/about", label: "Về dự án" },
-  { href: "/screening", label: "Sàng lọc" },
   { href: "/contribute", label: "Ủng hộ" },
 ];
 
@@ -17,7 +18,14 @@ function Brand() {
   </Link>;
 }
 
-export function Header() {
+export async function Header() {
+  const admin = await isAdmin((await cookies()).get(sessionCookie)?.value);
+  const links = admin ? [
+    ...publicLinks.slice(0, 2),
+    { href: "/screening", label: "Sàng lọc" },
+    { href: "/dashboard", label: "Quản lý" },
+    ...publicLinks.slice(2),
+  ] : publicLinks;
   return <header className="header"><div className="wrap header-row">
     <Brand />
     <nav className="nav" aria-label="Điều hướng chính">

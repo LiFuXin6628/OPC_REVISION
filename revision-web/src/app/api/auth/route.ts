@@ -27,7 +27,12 @@ export async function POST(request: NextRequest) {
   const key = signingKey();
   const username = process.env.ADMIN_USERNAME;
   const password = process.env.ADMIN_PASSWORD;
-  if (!key || !username || !password) return errorResponse("Quản trị viên chưa được cấu hình.", 503);
+  if (!key || !username || !password) {
+    // Log variable names only so deployment logs can diagnose setup without exposing credentials.
+    const invalid = [!username && "ADMIN_USERNAME", !password && "ADMIN_PASSWORD", !key && "JWT_SECRET (minimum 32 bytes)"].filter(Boolean);
+    console.error("RE:VISION invalid admin configuration:", invalid.join(", "));
+    return errorResponse("Quản trị viên chưa được cấu hình. Vui lòng kiểm tra ADMIN_USERNAME, ADMIN_PASSWORD và JWT_SECRET trên môi trường triển khai, sau đó deploy lại.", 503);
+  }
 
   const correctUser = equal(login.data.username, username);
   const correctPassword = equal(login.data.password, password);

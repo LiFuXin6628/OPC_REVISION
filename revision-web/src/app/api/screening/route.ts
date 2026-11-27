@@ -3,8 +3,12 @@ import { appendSubmission } from "@/lib/submissions";
 import { errorResponse, readJson } from "@/lib/http";
 import { screeningSchema } from "@/lib/screening";
 import { schoolDate } from "@/lib/constants";
+import { isAdmin, sessionCookie } from "@/lib/auth";
 
 export async function POST(request: NextRequest) {
+  if (!(await isAdmin(request.cookies.get(sessionCookie)?.value))) {
+    return errorResponse("Vui lòng đăng nhập với tài khoản quản trị để gửi phiếu sàng lọc.", 401);
+  }
   const body = await readJson(request, 16_384);
   if (!body.ok) return body.response;
   const student = screeningSchema.safeParse(body.data);
